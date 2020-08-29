@@ -62,9 +62,9 @@ print('\nFinal Root Mean Swaure Error on validation set: {}'.format(
     round(rmse_final, 3)))
 
 
-# test_features_norm = (test_features - train_mean) / train_std
-# mse, _, _ = model.evaluate(test_features_norm, test_labels)
-# rmse = np.sqrt(mse)
-# print('Root Mean Square Error on test set: {}'.format(round(rmse, 3)))
+test_features_norm = (test_features - train_mean) / train_std
+mse, _, _ = model.evaluate(test_features_norm, test_labels)
+rmse = np.sqrt(mse)
+print('Root Mean Square Error on test set: {}'.format(round(rmse, 3)))
 
 plot_history()

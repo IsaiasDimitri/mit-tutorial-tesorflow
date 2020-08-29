@@ -4,11 +4,16 @@
 
 import tensorflow as tf
 from tensorflow import keras
-import matplotlib.pyplot as plt
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense
-from six.moves import urllib
+import numpy as np
 import os
+import sys
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 import cv2
+import IPython
+from six.moves import urllib
 
 # Constants
 THIS_REPO_URL = 'https://github.com/lexfridman/mit-deep-learning/raw/master/'
@@ -75,15 +80,15 @@ test_loss, test_acc = model.evaluate(test_images, test_labels)
 
 print('Test accuracy:', test_acc*100, '%')
 
-mnist_dream_path = 'images/mnist_dream.mp4'
-mnist_prediction_path = 'images/mnist_dream_predicted.mp4'
+MNIST_DREAM_PATH = 'images/mnist_dream.mp4'
+MNIST_PREDICTION = 'images/mnist_dream_predicted.mp4'
 
 # download the video if running in Colab
-if not os.path.isfile(mnist_dream_path):
+if not os.path.isfile(MNIST_DREAM_PATH):
     print('downloading the sample video...')
-    vid_url = this_tutorial_url + '/' + mnist_dream_path
+    vid_url = THIS_TUTORIAL_URL + '/' + MNIST_DREAM_PATH
 
-    mnist_dream_path = urllib.request.urlretrieve(vid_url)[0]
+    MNIST_DREAM_PATH = urllib.request.urlretrieve(vid_url)[0]
 
 
 def cv2_imshow(img):
@@ -92,7 +97,7 @@ def cv2_imshow(img):
     IPython.display.display(img_ip)
 
 
-cap = cv2.VideoCapture(mnist_dream_path)
+cap = cv2.VideoCapture(MNIST_DREAM_PATH)
 vw = None
 frame = -1  # counter for debugging (mostly), 0-indexed
 
@@ -164,13 +169,13 @@ while True:  # should 481 frames
         y += 60
 
     # if you don't want to save the output as a video, set this to False
-    save_video = True
+    save_video = False
 
     if save_video:
         if vw is None:
             codec = cv2.VideoWriter_fourcc(*'DIVX')
             vid_width_height = img.shape[1], img.shape[0]
-            vw = cv2.VideoWriter(mnist_prediction_path,
+            vw = cv2.VideoWriter(MNIST_PREDICTION,
                                  codec, 30, vid_width_height)
         # 15 fps above doesn't work robustly so we right frame twice at 30 fps
         vw.write(img)
@@ -184,5 +189,6 @@ while True:  # should 481 frames
 cap.release()
 if vw is not None:
     vw.release()
+
 # Show after the code, to prevent freezing
 plt.show()

@@ -27,14 +27,13 @@ source .env/bin/activate
 pip install -r requirements.txt
 ```
 
-Now, you can run the part_1 and part_2, and see the output on terminal.
+Now, you can run the part_1, and see the output on terminal.
 
 ```bash
 # note that inside venv, we call 'python', not 'python3'
 python part_1.py 
-python part_2.py 
 ```
-
+The part_2.py only will work on jupyter notebook, but I keep the python file because (for me) is easier to debug.
 
 
 Any doubts, you can contact me and I'll try help as faster  as possible.
