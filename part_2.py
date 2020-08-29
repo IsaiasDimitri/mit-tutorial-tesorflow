@@ -7,6 +7,7 @@ from tensorflow import keras
 import matplotlib.pyplot as plt
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dropout, Flatten, Dense
 from six.moves import urllib
+import os
 import cv2
 
 # Constants
